@@ -63,7 +63,7 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     let starId = 5;
     let starPrice = web3.utils.toWei(".01", "ether");
     let balance = web3.utils.toWei(".05", "ether");
-    await instance.createStar('awesome star', starId, {from: user1});
+    await instance.createStar('Nejma', starId, {from: user1});
     await instance.putStarUpForSale(starId, starPrice, {from: user1});
     let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user2);
     const balanceOfUser2BeforeTransaction = await web3.eth.getBalance(user2);
@@ -104,7 +104,7 @@ it('lets 2 users exchange stars', async() => {
     let instance = await StarNotary.deployed(); 
     await instance.createStar('awesome star', tokenId, {from: user1});
     await instance.createStar('awesome star2', tokenId2, {from: user2});
-    await instance.exchangeStars.call(tokenId, tokenId2);
+    await instance.exchangeStars(tokenId, tokenId2);
     
     let new_owner_token1 = await instance.ownerOf.call(tokenId)
     let new_owner_token2 = await instance.ownerOf.call(tokenId2)
